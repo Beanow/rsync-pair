@@ -1,0 +1,45 @@
+version: "3.4"
+services:
+  client:
+    build: ./src
+    command: client
+    environment:
+      START_DELAY: 2
+      SHOW_PROGRESS: "yes"
+      BWLIMIT: 300
+      TASK_ORDER: pull push
+      PULL_FROM: server
+      PULL_TIMEOUT: 15s
+      PUSH_TO: server
+      PUSH_TIMEOUT: 15s
+      SSH_CONFIG: |
+        LogLevel INFO
+        ForwardAgent no
+        Host *
+          StrictHostKeyChecking no
+    tmpfs:
+      - /media/pull
+    volumes:
+      - client-config:/root/.ssh
+      - ./example/client:/media/push:ro
+
+  server:
+    build: ./src
+    command: server
+    environment:
+      BWLIMIT: 2
+      LOG_LEVEL: INFO
+      PUSH_KEY_FILE: /client/id_ed25519.pub
+      PULL_KEY_FILE: /client/id_ed25519.pub
+    tmpfs:
+      - /media/push
+      - /keys
+    volumes:
+      - client-config:/client:ro
+      - ./example/server:/media/pull:ro
+
+volumes:
+  client-config:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

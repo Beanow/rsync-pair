@@ -23,10 +23,13 @@ mkdir -p ~/.ssh
 # Log version for sanity.
 echo "Client rsync version: $(rsync --version | head -n1)"
 
-# Log it for easier setup.
+# Log key for easier setup.
 echo "Make sure to authorize the following public key:"
 cat ~/.ssh/id_ed25519.pub
 echo
+
+# Allow servers to catch up in tests.
+[ -n "${START_DELAY}" ] && sleep "${START_DELAY}"
 
 # Include custom ssh config.
 if [ -n "${SSH_CONFIG}" ]; then

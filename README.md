@@ -17,5 +17,6 @@ DOCKER_BUILDKIT=1 docker-compose up --build --force-recreate
 
 ```
 docker buildx create --use
-docker buildx build --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag ghcr.io/beanow/rsync-pair:latest src
+docker buildx build --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 \
+	--tag ghcr.io/beanow/rsync-pair:latest src
 ```
