@@ -1,0 +1,16 @@
+## sudoers file.
+##
+## This file MUST be edited with the 'visudo' command as root.
+## Failure to use 'visudo' may result in syntax or file permission errors
+## that prevent sudo from running.
+##
+## See the sudoers man page for the details on how to write a sudoers file.
+##
+
+# Allow root to sudo, as you'd expect.
+root ALL=(ALL) ALL
+
+# Users MAY use sudo to be root, without a password, for rsync only.
+# NOEXEC, means rsync may not shell out as root.
+push ALL=(root) NOPASSWD:NOEXEC:/usr/bin/rsync
+pull ALL=(root) NOPASSWD:NOEXEC:/usr/bin/rsync

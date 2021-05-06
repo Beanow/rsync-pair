@@ -1,0 +1,28 @@
+# Secure defaults
+# See: https://stribika.github.io/2015/01/04/secure-secure-shell.html
+Protocol 2
+HostKey /keys/ssh_host_ed25519_key
+HostKey /keys/ssh_host_rsa_key
+
+# We're expecting users to become root with sudo.
+PermitRootLogin no
+
+# Faster connection
+# See: https://github.com/atmoz/sftp/issues/11
+UseDNS no
+
+# Limited access
+X11Forwarding no
+AllowTcpForwarding no
+AllowAgentForwarding no
+ChallengeResponseAuthentication no
+PasswordAuthentication no
+
+# Just in case we've somehow escalated the below users forced commands.
+ForceCommand /bin/false
+
+# Pre-configure the command our push and pull users can run.
+Match User push
+	ForceCommand /bin/wrapped_rsync.sh push
+Match User pull
+	ForceCommand /bin/wrapped_rsync.sh pull
