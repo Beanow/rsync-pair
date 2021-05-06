@@ -15,12 +15,18 @@ echo "${bwlimit}" > /etc/rsync_bwlimit
 # Write the authorized_keys for push and/or pull.
 printf "%-12s | %-19s | %s\n" "username" "destination" "authorized_keys"
 echo "-------------|---------------------|---------------------------"
+if [ -f "${PUSH_KEY_FILE}" ]; then
+	PUSH_KEY=$(cat ${PUSH_KEY_FILE})
+fi
 if [ -n "${PUSH_KEY}" ]; then
 	printf "%-12s | %-19s | %s\n" "push" "/media/push" "${PUSH_KEY}"
 	mkdir -p "/home/push/.ssh"
 	echo "${PUSH_KEY}" > "/home/push/.ssh/authorized_keys"
 fi
 
+if [ -f "${PULL_KEY_FILE}" ]; then
+	PULL_KEY=$(cat ${PULL_KEY_FILE})
+fi
 if [ -n "${PULL_KEY}" ]; then
 	printf "%-12s | %-19s | %s\n" "pull" "/media/pull" "${PULL_KEY}"
 	mkdir -p "/home/pull/.ssh"
