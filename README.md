@@ -1,5 +1,7 @@
 # rsync-pair
 
+![License](https://img.shields.io/badge/License-BlueOak-blue)
+
 A Docker container running rsync-over-ssh.
 The `sshd` is locked down to only run a very specific
 rsync push/pull command.
