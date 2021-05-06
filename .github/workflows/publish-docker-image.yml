@@ -1,6 +1,8 @@
 # Copyright 2021 Beanow
 # SPDX-License-Identifier: BlueOak-1.0.0
 
+name: Publish Docker Image
+
 on:
   push:
     branches:
