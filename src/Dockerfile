@@ -4,10 +4,8 @@ RUN apk add --no-cache sudo bash shadow coreutils rsync openssh-client openssh-s
 	useradd -p '*' --no-user-group push; \
 	useradd -p '*' --no-user-group pull;
 
-COPY src/sshd_config /etc/ssh/sshd_config
-COPY --chown=0:0 --chmod=0440 src/sudoers /etc/sudoers
-COPY src/*.sh /bin/
-COPY LICENSE.md /LICENSE.md
-COPY README.md /README.md
+COPY sshd_config /etc/ssh/sshd_config
+COPY --chown=0:0 --chmod=0440 sudoers /etc/sudoers
+COPY *.sh /bin/
 
 ENTRYPOINT ["/bin/entry.sh"]
