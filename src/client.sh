@@ -3,6 +3,7 @@ set -o pipefail
 
 # Preferences in behaviour.
 readonly progress=${SHOW_PROGRESS:-no}
+readonly dry_run=${DRY_RUN:-no}
 readonly order=${TASK_ORDER:-push pull}
 readonly bwlimit=${BWLIMIT}
 
@@ -62,6 +63,7 @@ echo
 # Compile options
 opts="-aAXv --delete --partial --numeric-ids --open-noatime --stats --no-protect-args"
 [ "${progress}" == "yes" ] && opts="$opts --progress"
+[ "${dry_run}" == "yes" ] && opts="$opts --dry-run"
 [ -n "${bwlimit}" ] && opts="$opts --bwlimit=${bwlimit}"
 
 for task in ${order}; do

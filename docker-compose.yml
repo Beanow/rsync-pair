@@ -6,6 +6,7 @@ services:
     environment:
       START_DELAY: 2
       SHOW_PROGRESS: "yes"
+      DRY_RUN: "yes"
       BWLIMIT: 300
       TASK_ORDER: pull push
       PULL_FROM: server
