@@ -60,7 +60,7 @@ done
 echo
 
 # Compile options
-opts="-aAXv --delete --partial --numeric-ids --open-noatime --stats --no-protect-args"
+opts="-aAXv --delete -F --partial --numeric-ids --open-noatime --stats --no-protect-args"
 [ "${progress}" == "yes" ] && opts="$opts --progress"
 [ -n "${bwlimit}" ] && opts="$opts --bwlimit=${bwlimit}"
 
